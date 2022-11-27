@@ -1,0 +1,143 @@
+{% extends "SingventoryApp/user/base.html" %}
+{% load static %}
+
+
+{% block content %}
+
+    <div class="container col-lg-8">
+      <div class="row text-center mx-auto mb-4">
+        <h3 class="text-start">{{ equipment.name }}</h3>
+        <div class="col-md-6">
+          <img src="{{ equipment.image.url }}" alt="" class="img-fluid itemimg" />
+        </div>
+        
+      </div>
+      <div class="container col-md-10">
+        <!-- <p>
+          <span class="greenc">Equipment Name:</span> Acer Aspire 3
+          A315-57G-77EF Notebook
+        </p> -->
+        <p>
+          <span class="greenc">Specification: </span> {{ equipment.description }}
+        </p>
+        <p><span class="greenc">Category: </span>{{ equipment.category }}</p>
+        <p><span class="greenc">Stock: </span> {{ equipment.quantity }} </p>
+        <form action="" method="POST" class="pt-3 mb-5">
+          {% csrf_token %}
+          <div class="row mb-4">
+            <p class="warningmsg">{{ message }}</p>
+            <p class="col-md-2"><span class="greenc">Quantity:</span></p>
+            <div class="col-md-4">
+              {{ form.quantity }}
+            </div>
+          </div>
+          <button type="button" class="btn btn-view col-md-3" data-bs-toggle="modal" data-bs-target="#exampleModal">Borrow</button>
+
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">Confirmation</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  Are you sure you want to borrow {{equipment.name}}?
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary">Yes</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="footer bg-dark w-200 text-light p-4 mt-5">
+      <div class="container">
+        <div class="row">
+          <!--Footer About-->
+          <div class="col-md-6 col-lg-3">
+            <div class="footer-about">
+              <h6>About Us</h6>
+              <p style="font-size: 80%">
+                The purpose of the singentory system is to make borrowing more
+                convenient and easy for everyone!
+              </p>
+              <div class="footer-social">
+                <a href=""><i class="fab fa-twitter"></i></a>
+                <a href=""><i class="fab fa-facebook-f"></i></a>
+                <a href=""><i class="fab fa-youtube"></i></a>
+                <a href=""><i class="fab fa-instagram"></i></a>
+                <a href=""><i class="fab fa-linkedin-in"></i></a>
+              </div>
+            </div>
+          </div>
+    
+          <!--Contact Us-->
+          <div class="col-md-6 col-lg-3">
+            <div class="footer-contact">
+              <h6>Get In Touch</h6>
+              <p style="font-size: 80%">
+                <i class="fa fa-map-marker-alt"></i>&nbsp; &nbsp; &nbsp;Gyalpozhing,
+                Mongar, Bhutan
+              </p>
+              <p style="font-size: 80%">
+                <i class="fa fa-phone-alt"></i>&nbsp; &nbsp;+975 17722345
+              </p>
+              <p style="font-size: 80%">
+                <i class="fa fa-envelope"></i>&nbsp; &nbsp;tdema5133@gmail.com
+              </p>
+            </div>
+          </div>
+    
+          <!--Footer Link-->
+          <div class="col-md-6 col-lg-3">
+            <div class="footer-links">
+              <h6>Useful Links</h6>
+              <a href="https://www.gcit.edu.bt/" style="font-size: 80%"
+                >Gyalpoizhing College</a
+              ><br />
+              <a href="https://www.rub.edu.bt/" style="font-size: 80%"
+                >Royal University Of Bhutan
+              </a>
+            </div>
+          </div>
+    
+          <!--project Image-->
+          <div class="col-md-6 col-lg-3">
+            <div class="footer-project">
+              <img
+                src="{% static 'SingventoryApp/images/Logo-footer-removebg-preview.png' %}"
+                style="
+                  width: 200px;
+                  height: 160px;
+                  margin-top: 0px;
+                  margin-left: 10px;
+                  color: white;
+                "
+              />
+              <!--<img src={% static 'SingventoryApp/images/Logo-footer-removebg-preview.png' %} -->
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <!-- Newswletter -->
+      <div class="copyright">
+        <div class="container">
+          <div class="row align-items-center">
+            <!--Copy Right-->
+    
+            <!--Footer Menu-->
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Footer End -->
+
+    
+    
+{% endblock content %}
+    

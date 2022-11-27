@@ -1,0 +1,126 @@
+{% extends "SingventoryApp/user/base.html" %}
+{% load static %}
+
+
+{% block content %}
+
+
+      <h2 class="text center" style="margin-left: 20px;"> Search Results:  </h5>
+
+        <hr>
+
+        <div class="container">
+
+
+      <div class="row mt-5 gx-5">
+        {% for equipment in equipments %}
+        <div class="col-md-4">
+          <div class="card mb-4 align-items-center">
+            <img
+              src="{{ equipment.image.url }}"
+              class="card-img-top"
+              alt="..."
+            />
+            <div class="card-body container-fluid">
+              <p class="card-text text-start">{{ equipment.name }}</p>
+              <form
+                class="col"
+                action="{% url 'useritem' equipment.pk %}"
+                method="post"
+              >
+                {% csrf_token %}
+                <button type="submit" class="btn btn-view">View</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        {% empty %}
+        <h3>There are currently no items available.</h3>
+        {% endfor %}
+      </div>
+      <div class="footer bg-dark w-200 text-light p-4 mt-5">
+        <div class="container">
+          <div class="row">
+            <!--Footer About-->
+            <div class="col-md-6 col-lg-3">
+              <div class="footer-about">
+                <h6>About Us</h6>
+                <p style="font-size: 80%">
+                  The purpose of the singventory system is to make borrowing more
+                  convenient and easy for everyone!
+                </p>
+                <div class="footer-social">
+                  <a href=""><i class="fab fa-twitter"></i></a>
+                  <a href=""><i class="fab fa-facebook-f"></i></a>
+                  <a href=""><i class="fab fa-youtube"></i></a>
+                  <a href=""><i class="fab fa-instagram"></i></a>
+                  <a href=""><i class="fab fa-linkedin-in"></i></a>
+                </div>
+              </div>
+            </div>
+      
+            <!--Contact Us-->
+            <div class="col-md-6 col-lg-3">
+              <div class="footer-contact">
+                <h6>Get In Touch</h6>
+                <p style="font-size: 80%">
+                  <i class="fa fa-map-marker-alt"></i>&nbsp; &nbsp; &nbsp;Gyalpozhing,
+                  Mongar, Bhutan
+                </p>
+                <p style="font-size: 80%">
+                  <i class="fa fa-phone-alt"></i>&nbsp; &nbsp;+975 17722345
+                </p>
+                <p style="font-size: 80%">
+                  <i class="fa fa-envelope"></i>&nbsp; &nbsp;tdema5133@gmail.com
+                </p>
+              </div>
+            </div>
+      
+            <!--Footer Link-->
+            <div class="col-md-6 col-lg-3">
+              <div class="footer-links">
+                <h6>Useful Links</h6>
+                <a href="https://www.gcit.edu.bt/" style="font-size: 80%"
+                  >Gyalpoizhing College</a
+                ><br />
+                <a href="https://www.rub.edu.bt/" style="font-size: 80%"
+                  >Royal University Of Bhutan
+                </a>
+              </div>
+            </div>
+      
+            <!--project Image-->
+            <div class="col-md-6 col-lg-3">
+              <div class="footer-project">
+                <img
+                  src="{% static 'SingventoryApp/images/Logo-footer-removebg-preview.png' %}"
+                  style="
+                    width: 200px;
+                    height: 160px;
+                    margin-top: 0px;
+                    margin-left: 10px;
+                    color: white;
+                  "
+                />
+                <!--<img src={% static 'SingventoryApp/images/Logo-footer-removebg-preview.png' %} -->
+              </div>
+            </div>
+          </div>
+        </div>
+      
+        <!-- Newswletter -->
+        <div class="copyright">
+          <div class="container">
+            <div class="row align-items-center">
+              <!--Copy Right-->
+      
+              <!--Footer Menu-->
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Footer End -->
+
+     
+    {% endblock content %}
+    

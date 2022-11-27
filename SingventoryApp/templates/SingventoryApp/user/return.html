@@ -1,0 +1,104 @@
+{% extends "SingventoryApp/user/base.html" %}
+{% load static %}
+
+
+{% block content %}
+
+    <div class="container col-md-8 row mx-auto mb-5">
+      <h4 class="mb-5">Return</h4>
+
+     <form action="" method="post" class="mb-5">
+      {% csrf_token %}
+      <div class="mb-3">
+        Enter number of equipment to return:
+        <label for="exampleInputEmail1" class="form-label"></label>
+        <input type="number" class="form-control" aria-describedby="emailHelp" name="qty">
+      </div>
+      <button type="submit" class="btn btn-view col-md-3">Submit</button>
+     </form>
+    </div>
+    <div class="footer bg-dark w-200 text-light p-4 mt-5 fixed-bottom">
+      <div class="container">
+        <div class="row">
+          <!--Footer About-->
+          <div class="col-md-6 col-lg-3">
+            <div class="footer-about">
+              <h6>About Us</h6>
+              <p style="font-size: 80%">
+                The purpose of the singventory system is to make borrowing more
+                convenient and easy for everyone!
+              </p>
+              <div class="footer-social">
+                <a href=""><i class="fab fa-twitter"></i></a>
+                <a href=""><i class="fab fa-facebook-f"></i></a>
+                <a href=""><i class="fab fa-youtube"></i></a>
+                <a href=""><i class="fab fa-instagram"></i></a>
+                <a href=""><i class="fab fa-linkedin-in"></i></a>
+              </div>
+            </div>
+          </div>
+    
+          <!--Contact Us-->
+          <div class="col-md-6 col-lg-3">
+            <div class="footer-contact">
+              <h6>Get In Touch</h6>
+              <p style="font-size: 80%">
+                <i class="fa fa-map-marker-alt"></i>&nbsp; &nbsp; &nbsp;Gyalpozhing,
+                Mongar, Bhutan
+              </p>
+              <p style="font-size: 80%">
+                <i class="fa fa-phone-alt"></i>&nbsp; &nbsp;+975 17722345
+              </p>
+              <p style="font-size: 80%">
+                <i class="fa fa-envelope"></i>&nbsp; &nbsp;tdema5133@gmail.com
+              </p>
+            </div>
+          </div>
+    
+          <!--Footer Link-->
+          <div class="col-md-6 col-lg-3">
+            <div class="footer-links">
+              <h6>Useful Links</h6>
+              <a href="https://www.gcit.edu.bt/" style="font-size: 80%"
+                >Gyalpozhing College</a
+              ><br />
+              <a href="https://www.rub.edu.bt/" style="font-size: 80%"
+                >Royal University Of Bhutan
+              </a>
+            </div>
+          </div>
+    
+          <!--project Image-->
+          <div class="col-md-6 col-lg-3">
+            <div class="footer-project">
+              <img
+                src="{% static 'SingventoryApp/images/Logo-footer-removebg-preview.png' %}"
+                style="
+                  width: 200px;
+                  height: 160px;
+                  margin-top: 0px;
+                  margin-left: 10px;
+                  color: white;
+                "
+              />
+              <!--<img src={% static 'SingventoryApp/images/Logo-footer-removebg-preview.png' %} -->
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <!-- Newswletter -->
+      <div class="copyright">
+        <div class="container">
+          <div class="row align-items-center">
+            <!--Copy Right-->
+    
+            <!--Footer Menu-->
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Footer End -->
+
+{% endblock content %}
+    

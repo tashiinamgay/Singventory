@@ -1,0 +1,167 @@
+{% extends "SingventoryApp/user/base.html" %}
+{% load static %}
+
+{% block content %}
+
+    <div class="container col-sm-10 mb-5">
+      <h2 class="mb-5">
+        <span class="boldd greenc">SING</span><span class="v">V</span
+        ><span class="thin greenc">entory</span>
+      </h2>
+      <h4 class="mb-5">Welcome back, {{ user.name }}.</h4>
+      <ul class="nav nav-pills nav-fill pt-4">
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="{% url 'userhome' %}">All</a>
+        </li>
+        {% for cates in cate %}
+        <li class="nav-item ">
+          <form action="{% url 'categoryview' cates.pk %}" method="POST">
+            {% csrf_token %}
+            <button class="nav-link" type="submit" aria-current="page">
+              {{cates.name}}
+            </button>
+          </form>
+        </li>
+        {% endfor %}
+      </ul>
+
+      <div class="row mt-5 gx-5">
+        {% for equipment in equipments %}
+        <div class="col-md-4">
+          <div class="card mb-4 align-items-center p-2">
+            <img
+              src="{{ equipment.image.url }}"
+              class="card-img-top"
+              alt="..."
+            />
+            <div class="card-body container-fluid">
+              <p class="card-text text-start">{{ equipment.name }}</p>
+              <p class="card-text text-start">Quantity: {{ equipment.quantity }}</p>
+              <form
+                class="col"
+                action="{% url 'useritem' equipment.pk %}"
+                method="post"
+              >
+                {% csrf_token %}
+                <button type="submit" class="btn btn-view">View</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        
+        {% empty %}
+        <h5>There are currently no equipment available.</h5>
+        {% endfor %}
+        <nav aria-label="..." class="mt-5">
+          {% if equipments.has_other_pages %}
+            <ul class="pagination justify-content-center">
+              {% if equipments.has_previous %}
+                <li class="page-item"><a class="page-link" href="?page={{ equipments.previous_page_number }}">Previous</a></li>
+              {% else %}
+                <li class="page-item disabled"><span class="page-link">Previous</span></li>
+              {% endif %}
+     
+              {% for i in equipments.paginator.page_range %}
+                {% if equipments.number == i %}
+                <li class="page-item active" aria-current="page"><a class="page-link" href="#">{{ i }}</a></li>
+                {% else %}
+                <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                {% endif %}
+              {% endfor %}
+     
+              {% if equipments.has_next %}
+                <li class="page-item"><a class="page-link" href="?page={{ equipments.next_page_number }}">Next</a></li>
+              {% else %}
+                <li class="page-item disabled"><span class="page-link">Next</span></li>
+              {% endif %}
+            </ul>
+          {% endif %}
+        </nav>
+      </div>
+    </div>
+    <div class="footer bg-dark w-200 text-light p-4 mt-5">
+      <div class="container">
+        <div class="row">
+          <!--Footer About-->
+          <div class="col-md-6 col-lg-3">
+            <div class="footer-about">
+              <h6>About Us</h6>
+              <p style="font-size: 80%">
+                The purpose of the singventory system is to make borrowing more
+                convenient and easy for everyone!
+              </p>
+              <div class="footer-social">
+                <a href=""><i class="fab fa-twitter"></i></a>
+                <a href=""><i class="fab fa-facebook-f"></i></a>
+                <a href=""><i class="fab fa-youtube"></i></a>
+                <a href=""><i class="fab fa-instagram"></i></a>
+                <a href=""><i class="fab fa-linkedin-in"></i></a>
+              </div>
+            </div>
+          </div>
+    
+          <!--Contact Us-->
+          <div class="col-md-6 col-lg-3">
+            <div class="footer-contact">
+              <h6>Get In Touch</h6>
+              <p style="font-size: 80%">
+                <i class="fa fa-map-marker-alt"></i>&nbsp; &nbsp; &nbsp;Gyalpozhing,
+                Mongar, Bhutan
+              </p>
+              <p style="font-size: 80%">
+                <i class="fa fa-phone-alt"></i>&nbsp; &nbsp;+975 17722345
+              </p>
+              <p style="font-size: 80%">
+                <i class="fa fa-envelope"></i>&nbsp; &nbsp;tdema5133@gmail.com
+              </p>
+            </div>
+          </div>
+    
+          <!--Footer Link-->
+          <div class="col-md-6 col-lg-3">
+            <div class="footer-links">
+              <h6>Useful Links</h6>
+              <a href="https://www.gcit.edu.bt/" style="font-size: 80%"
+                >Gyalpoizhing College</a
+              ><br />
+              <a href="https://www.rub.edu.bt/" style="font-size: 80%"
+                >Royal University Of Bhutan
+              </a>
+            </div>
+          </div>
+    
+          <!--project Image-->
+          <div class="col-md-6 col-lg-3">
+            <div class="footer-project">
+              <img
+                src="{% static 'SingventoryApp/images/Logo-footer-removebg-preview.png' %}"
+                style="
+                  width: 200px;
+                  height: 160px;
+                  margin-top: 0px;
+                  margin-left: 10px;
+                  color: white;
+                "
+              />
+              <!--<img src={% static 'SingventoryApp/images/Logo-footer-removebg-preview.png' %} -->
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <!-- Newswletter -->
+      <div class="copyright">
+        <div class="container">
+          <div class="row align-items-center">
+            <!--Copy Right-->
+    
+            <!--Footer Menu-->
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Footer End -->
+{% endblock content %}
+
+    <!--search-->
+

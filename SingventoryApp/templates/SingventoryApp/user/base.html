@@ -1,0 +1,203 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="{% static 'SingventoryApp/images/favicon.ico' %}"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://kit.fontawesome.com/efbcf4d813.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'SingventoryApp/main.css' %}"
+    />
+    <title>Singventory</title>
+  </head>
+
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light py-4 px-5 mb-4">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'userhome' %}"
+          ><img
+            src="{% static 'SingventoryApp/images/logo.png' %}"
+            alt=""
+            width="80"
+            height="60"
+        /></a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+       
+        <form action="{% url 'search' %}" method="get" class="collapse navbar-collapse">
+          <input class="form-control searchc" type="text" name="query" placeholder="Search" aria-label="Search">
+        
+        </form>
+          
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a
+                class="nav-link px-3"
+                aria-current="page"
+                href="{% url 'userhome' %}"
+                >Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link px-3"
+                aria-current="page"
+                href="{% url 'userequip' %}"
+                >Equipment</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link px-3"
+                aria-current="page"
+                href="{% url 'userabout' %}"
+                >About</a
+              >
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link px-3 linkc"
+                aria-current="page"
+                aria-current="page"
+                type="button"
+                id="dropdownMenuButton1"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                ><i class="fa-solid fa-bell">
+                  </i>
+                  {% if unreadcount > 0 %}
+                  <span class="position-absolute top-5 start-80 translate-middle p-1 bg-danger border border-light rounded-circle">
+                    <span class="visually-hidden">New alerts</span>
+                  </span>
+                  {% endif %}
+              </a>
+              <ul
+                class="dropdown-menu yes"
+                aria-labelledby="dropdownMenuButton1"
+              >
+              {% for notification in notifications|slice:":4" %} 
+              {% if notification.status == 'approved' %}
+                {% if notification.readStatus == 'read' %}
+                <li>
+                  <a class="dropdown-item smol" href="{% url 'unread' notification.pk %}"
+                    >Your request for {{notification.equipment}} has been
+                    approved. &nbsp; <span class="small text-muted">{{notification.date}}</span></a
+                  >
+                </li>
+                {% else %}
+                <li>
+                  <a class="dropdown-item smol" href="{% url 'unread' notification.pk %}"
+                    ><b>Your request for {{notification.equipment}} has been
+                      approved.</b>  &nbsp; <span class="small text-muted">{{notification.date}}</span></a
+                  >
+                </li>
+                {% endif %}
+              {% elif notification.status == 'rejected' %}
+              {% if notification.readStatus == 'read' %}
+                <li>
+                  <a class="dropdown-item smol" href="{% url 'unread' notification.pk %}"
+                    >Your request for {{notification.equipment}} has been
+                    rejected.<br><span class="small text-muted">{{notification.date}}</span></a
+                  >
+                </li>
+                {% else %}
+                <li>
+                  <a class="dropdown-item smol" href="{% url 'unread' notification.pk %}"
+                    ><b>Your request for {{notification.equipment}} has been
+                      rejected.</b><br><span class="small text-muted">{{notification.date}}</span></a
+                  >
+                </li>
+                {% endif %}
+                {% elif notification.status == 'cancelled' %}
+              {% if notification.readStatus == 'read' %}
+                <li>
+                  <a class="dropdown-item smol" href="{% url 'unread' notification.pk %}"
+                    >Your request for {{notification.equipment}} has been successfully
+                    cancelled.<br><span class="small text-muted">{{notification.date}}</span></a
+                  >
+                </li>
+                {% else %}
+                <li>
+                  <a class="dropdown-item smol" href="{% url 'unread' notification.pk %}"
+                    ><b>Your request for {{notification.equipment}} has been successfully
+                      cancelled.</b><br><span class="small text-muted">{{notification.date}}</span></a
+                  >
+                </li>
+                {% endif %}
+              {% endif %}
+            {% empty %}
+              <li>
+                  <a class="dropdown-item smol" href=""
+                    >You do not have any notifications.</a
+                  >
+                </li>
+            {% endfor %}
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link px-3 linkc"
+                aria-current="page"
+                type="button"
+                id="dropdownMenuButton1"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                ><i class="fa-solid fa-user"></i>
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li>
+                  <a class="dropdown-item" href="{% url 'userprofile' %}"
+                    >Profile</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    {% block content %}
+    {% endblock %}
+    
+
+</body>
+</html>
